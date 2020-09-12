@@ -25,7 +25,7 @@ from requests_toolbelt.utils import dump
 # Custom Python libraries.
 
 
-__version__ = "1.0"
+__version__ = "1.01"
 
 
 class GumroadClient:
@@ -243,7 +243,7 @@ class GumroadClient:
         if json_response["success"] is True:
             offer_codes = json_response["offer_codes"]
         else:
-            print("Unable to retrieve all offer codes.")
+            print(f"Unable to retrieve all offer codes for product ID: {product_id}")
 
         return offer_codes
 
@@ -352,18 +352,21 @@ class GumroadClient:
         if not current_offer_codes:
             current_offer_codes = self.retrieve_all_offer_code_names_for_a_product(product_id)
 
-        new_offer_code_name = "".join(
-            random.choice(string.ascii_lowercase + string.digits) for _ in range(offer_code_length)
-        )
+        new_offer_code_name = None
 
-        # Only enters this loop if new_offer_code_name already exists.
-        while new_offer_code_name in current_offer_codes:
-            print(f"Offer code already exists: {new_offer_code_name}")
+        if current_offer_codes:
             new_offer_code_name = "".join(
                 random.choice(string.ascii_lowercase + string.digits) for _ in range(offer_code_length)
             )
 
-        print(f"Generated new offer code: {new_offer_code_name}")
+            # Only enters this loop if new_offer_code_name already exists.
+            while new_offer_code_name in current_offer_codes:
+                print(f"Offer code already exists: {new_offer_code_name}")
+                new_offer_code_name = "".join(
+                    random.choice(string.ascii_lowercase + string.digits) for _ in range(offer_code_length)
+                )
+
+            print(f"Generated new offer code: {new_offer_code_name}")
 
         return new_offer_code_name
 
