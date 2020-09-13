@@ -11,6 +11,10 @@ Note that not all of the endpoints and HTTP verbs supported by the Gumroad API h
 ## Installation
 
 ```bash
+pip install pygumroad
+```
+
+```bash
 virtualenv -p python3.7 .venv  # If using a virtual environment.
 source .venv/bin/activate  # If using a virtual environment.
 pip install -r requirements.txt
@@ -19,7 +23,8 @@ python setup.py install
 
 ## Update Credentials
 
-Update the `gumroad_secrets.json` file with the host and API key.
+If using a secrets file, create/update the `gumroad_secrets.json` file with the host and API key.  See the usage section
+on how to pass a secrets dictionary.
 
 ```bash
 cp gumroad_secrets_empty.json gumroad_secrets.json

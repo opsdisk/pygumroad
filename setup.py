@@ -1,13 +1,23 @@
-# https://pythonhosted.org/an_example_pypi_project/setuptools.html
+import setuptools
 
-from setuptools import setup
+with open("README.md", "r") as fh:
+    long_description = fh.read()
 
-setup(
+setuptools.setup(
     name="pygumroad",
-    version="1.0",
-    packages=["pygumroad"],
+    version="0.0.1",
     author="Brennon Thomas",
-    description="API client library for the Gumroad API.",
+    author_email="info@opsdisk.com",
+    description="A Python API client for interacting with the Gumroad API.",
+    long_description=long_description,
+    long_description_content_type="text/markdown",
+    url="https://github.com/opsdisk/pygumroad",
+    packages=setuptools.find_packages(),
+    install_requires=[
+        "requests>=2.24.0",
+        "requests-toolbelt>=0.9.1",
+    ],
+    python_requires=">=3.6",
     license="GNU General Public License v3.0",
-    keywords="python gumroad",
+    keywords="python gumroad api client",
 )
