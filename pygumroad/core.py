@@ -7,7 +7,7 @@ Note that not all endpoints and HTTP verbs have been added.
 Usage:
 
 import pygumroad
-gumroad_client = pygumroad.GumroadClient()
+gumroad_client = pygumroad.GumroadClient(secrets_file_location="/home/user/secrets.json")
 all_products = gumroad_client.retrieve_all_products()
 """
 
@@ -16,7 +16,7 @@ import json
 import random
 import string
 import sys
-import urllib3
+# import urllib3
 
 # Third party Python libraries.
 import requests
@@ -25,7 +25,7 @@ from requests_toolbelt.utils import dump
 # Custom Python libraries.
 
 
-__version__ = "1.01"
+__version__ = "0.0.1"
 
 
 class GumroadClient:
@@ -95,8 +95,8 @@ class GumroadClient:
         # Extract api_self_signed, defaults to False.
         self.api_self_signed = kwargs.get("api_self_signed", False)
 
-        if self.api_self_signed:
-            urllib3.disable_warnings()
+        # if self.api_self_signed:
+        #     urllib3.disable_warnings()
 
         self.debug_print = False
 
