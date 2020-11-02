@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="pygumroad",
-    version="0.0.1",
+    version="0.0.2",
     author="Brennon Thomas",
     author_email="info@opsdisk.com",
     description="A Python API client for interacting with the Gumroad API.",
