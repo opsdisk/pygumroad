@@ -15,6 +15,8 @@ pip install pygumroad
 ```
 
 ```bash
+git clone https://github.com/opsdisk/pygumroad.git
+cd pygumroad
 virtualenv -p python3.7 .venv  # If using a virtual environment.
 source .venv/bin/activate  # If using a virtual environment.
 pip install -r requirements.txt

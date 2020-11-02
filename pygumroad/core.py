@@ -16,6 +16,7 @@ import json
 import random
 import string
 import sys
+
 # import urllib3
 
 # Third party Python libraries.
@@ -25,7 +26,7 @@ from requests_toolbelt.utils import dump
 # Custom Python libraries.
 
 
-__version__ = "0.0.1"
+__version__ = "0.0.2"
 
 
 class GumroadClient:
@@ -276,6 +277,31 @@ class GumroadClient:
             print("Unable to create the offer code.")
 
         return offer_code
+
+    def delete_offer_code(self, product_id, offer_code_name):
+        """Delete an offer code given a product_id and offer_code_id"""
+
+        offer_code_deleted_successfully = False
+
+        offer_codes = self.retrieve_offer_codes_for_product(product_id)
+
+        if offer_codes:
+
+            offer_code_id = None
+
+            for offer_code in offer_codes:
+                if offer_code["name"] == offer_code_name:
+                    offer_code_id = offer_code["id"]
+
+            if offer_code_id:
+
+                response = self.api_query(f"/v2/products/{product_id}/offer_codes/{offer_code_id}", method="DELETE")
+                json_response = response.json()
+
+                if json_response["success"] is True:
+                    offer_code_deleted_successfully = True
+
+        return offer_code_deleted_successfully
 
     # SALES
     def retrieve_sales(self, payload={}, page=1):
