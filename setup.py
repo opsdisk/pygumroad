@@ -15,8 +15,7 @@ setuptools.setup(
     packages=setuptools.find_packages(),
     install_requires=[
         "requests>=2.24.0",
-        "requests-toolbelt>=0.9.1",
-        "appengine-python-standard>=1.1.4"
+        "requests-toolbelt>=1.0.0",
     ],
     python_requires=">=3.6",
     license="GNU General Public License v3.0",
