@@ -26,7 +26,7 @@ from requests_toolbelt.utils import dump
 # Custom Python libraries.
 
 
-__version__ = "0.0.2"
+__version__ = "0.0.3"
 
 
 class GumroadClient:
@@ -304,10 +304,10 @@ class GumroadClient:
         return offer_code_deleted_successfully
 
     # SALES
-    def retrieve_sales(self, payload={}, page=1):
+    def retrieve_sales(self, payload={}, page_key=None):
         """Retrieve sales given an optional payload or page."""
 
-        payload["page"] = page
+        payload["page_key"] = page_key
 
         response = self.api_query("/v2/sales", method="GET", payload=payload)
         json_response = response.json()
@@ -321,12 +321,12 @@ class GumroadClient:
 
         return sales
 
-    def retrieve_all_sales(self, payload={}, page=1):
+    def retrieve_all_sales(self, payload={}, page_key=None):
         """Retrieve all the sales given an optional payload or page"""
 
         all_sales = []
 
-        payload["page"] = page
+        payload["page_key"] = page_key
 
         response = self.api_query(f"/v2/sales", method="GET", payload=payload)
         json_response = response.json()
@@ -342,8 +342,8 @@ class GumroadClient:
             while next_page_url:
 
                 # Update the page key.
-                page += 1
-                payload["page"] = page
+                page_key = json_response["next_page_key"]
+                payload["page_key"] = page_key
 
                 response = self.api_query(f"/v2/sales", method="GET", payload=payload)
                 json_response = response.json()
